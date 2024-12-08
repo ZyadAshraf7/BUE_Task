@@ -113,8 +113,3 @@ This page displays all registrations with the following features:
 - **Search:**
   - Allows searching by name or email.
 
----
-
-## Additional Information
-
-If you face any issues or have suggestions, feel free to contact me. Your feedback is highly appreciated!
