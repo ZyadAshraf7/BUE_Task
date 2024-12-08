@@ -12,7 +12,7 @@ const AddRegistration = () => {
     });
     const baseLink = `https://localhost:7239/api/Registiration/`;
     const [errors, setErrors] = useState({});
-    const [selectedCode, setSelectedCode] = useState("Country Code"); // To hold the current country code
+    const [selectedCode, setSelectedCode] = useState("Country Code");
 
     const navigate = useNavigate();
 
