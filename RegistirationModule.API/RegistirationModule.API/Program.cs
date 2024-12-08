@@ -28,9 +28,9 @@ namespace RegistirationModule.API
             });
 
             Log.Logger = new LoggerConfiguration()
-                 .MinimumLevel.Information() // Log only Information and above by default
-                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning) // Suppress framework logs
-                .MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning) // Suppress ASP.NET Core logs
+                 .MinimumLevel.Information() 
+                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)
                 .Enrich.FromLogContext()
                 .WriteTo.File("./logs/logNow.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
