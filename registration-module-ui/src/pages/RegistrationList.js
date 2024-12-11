@@ -37,6 +37,12 @@ const RegistrationList = () => {
             setRegistrations(response.data);
         } catch (error) {
             stopLoading();
+            console.log(error.toString());
+            Swal.fire({
+                icon: "error",
+                title: "Oops",
+                text: error.toString() || "An error occurred during fetching registrations."
+            })
             setRegistrations([])
         }
 
