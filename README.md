@@ -90,7 +90,7 @@ This project includes a `RegistirationController` that provides the following AP
 ### Pages
 
 #### 1. Add New Registration Page
-This page allows users to create a new registration. It enforces the following constraints:
+This page allows users to create a new registration. It enforces the following real-time constraints:
 
 - **Full Name:**
   - Minimum 3 characters, maximum 50 characters.
