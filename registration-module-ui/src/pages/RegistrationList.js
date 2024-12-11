@@ -130,14 +130,14 @@ const RegistrationList = () => {
                     disabled={pageIndex === 0}
                     onClick={() => setPageIndex(pageIndex - 1)}
                 >
-                    Previous
+                    <span>{"<<Previous"}</span>
                 </button>
                 <button
-                    className="btn btn-secondary"
+                    className="btn btn-success"
                     disabled={checkIfDisable()}
                     onClick={() => setPageIndex(pageIndex + 1)}
                 >
-                    Next
+                    <span>{"Next>>"}</span>
                 </button>
             </div>
         </div>
