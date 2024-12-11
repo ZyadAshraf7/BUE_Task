@@ -9,6 +9,7 @@ const RegistrationList = () => {
     const [searchType, setSearchType] = useState(0);
     const [searchInput, setSearchInput] = useState('');
     const [totalRegistrations, setTotalRegistrations] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const baseLink = `https://localhost:7239/api/Registiration/`;
     useEffect(() => {
@@ -22,16 +23,33 @@ const RegistrationList = () => {
             return false;
         return true;
     }
+    const setLoading = () => {
+        setIsLoading(true);
+      };
+      const stopLoading = () => {
+        setIsLoading(false);
+      };
     const fetchRegistrations = async () => {
-        const response = await axios.get(`${baseLink}GetRegistirations?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+        try {
+            setLoading();
+            const response = await axios.get(`${baseLink}GetRegistirations?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+            stopLoading();
+            setRegistrations(response.data);
+        } catch (error) {
+            stopLoading();
+            setRegistrations([])
+        }
 
-        setRegistrations(response.data);
 
     };
     const fetchRegistrationsCount = async () => {
-        const response = await axios.get(`${baseLink}GetRegistirationsCount`);
+        try {
+            const response = await axios.get(`${baseLink}GetRegistirationsCount`);
 
-        setTotalRegistrations(response.data);
+            setTotalRegistrations(response.data);
+        } catch (error) {
+            setTotalRegistrations(0)
+        }
     };
 
     const handleSearch = async () => {
@@ -54,7 +72,7 @@ const RegistrationList = () => {
     return (
         <div>
             <h2>Registrations</h2>
-            
+
             <button className="btn btn-success mt-3 mb-5 w-100" onClick={() => navigate('/add')}>
                 + Add Registration
             </button>
@@ -87,18 +105,20 @@ const RegistrationList = () => {
                     </label>
                 </div>
                 <div className='d-flex justofy-content-start'>
-                <button
-                    disabled={searchInput === ""}
-                    className="btn btn-primary mt-2 me-2" onClick={handleSearch}>
-                    Search
-                </button>
-                <button
-                style={{marginTop:'auto'}}
-                    className="btn btn-secondary" onClick={() => { fetchRegistrations(); fetchRegistrationsCount();}}>
-                    Reset
-                </button>
+                    <button
+                        disabled={searchInput === ""}
+                        className="btn btn-primary mt-2 me-2" onClick={handleSearch}>
+                        Search
+                    </button>
+                    <button
+                        style={{ marginTop: 'auto' }}
+                        className="btn btn-secondary" onClick={() => { fetchRegistrations(); fetchRegistrationsCount(); }}>
+                        Reset
+                    </button>
                 </div>
             </div>
+            {isLoading &&  <div className="spinner-border text-primary"></div>}
+            {!isLoading && 
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -121,6 +141,7 @@ const RegistrationList = () => {
                     ))}
                 </tbody>
             </table>
+            }
             <div>
                 {Math.min((pageIndex + 1) * pageSize, totalRegistrations)} out of {totalRegistrations}
             </div>
