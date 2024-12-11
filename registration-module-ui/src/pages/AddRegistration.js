@@ -16,6 +16,7 @@ const AddRegistration = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [selectedCode, setSelectedCode] = useState("Country Code"); // To hold the current country code
 
+
     const navigate = useNavigate();
 
     const validateField = (fieldName) => {
