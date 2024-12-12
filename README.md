@@ -31,7 +31,7 @@
 ## WebAPI Project Documentation
 
 ### Overview
-This project includes a `RegistirationController` that provides the following API endpoints. All endpoints log activity using Serilog for detailed monitoring.
+This project includes a `RegistirationController` that provides the following API endpoints. All endpoints log activity using **Serilog** for detailed monitoring.
 
 ### Endpoints
 
