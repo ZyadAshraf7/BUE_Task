@@ -17,7 +17,8 @@ const RegistrationList = () => {
         fetchRegistrations();
     }, [pageIndex]);
     const pageSize = 5;
-    const checkIfDisable = () => {
+
+    const checkNextBtnDisable = () => {
         const totalRegsRendered = (pageIndex + 1) * pageSize;
         if (totalRegsRendered < totalRegistrations)
             return false;
@@ -45,8 +46,6 @@ const RegistrationList = () => {
             })
             setRegistrations([])
         }
-
-
     };
     const fetchRegistrationsCount = async () => {
         try {
@@ -161,7 +160,7 @@ const RegistrationList = () => {
                 </button>
                 <button
                     className="btn btn-success"
-                    disabled={checkIfDisable()}
+                    disabled={checkNextBtnDisable()}
                     onClick={() => setPageIndex(pageIndex + 1)}
                 >
                     <span>{"Next>>"}</span>
