@@ -44,10 +44,12 @@ namespace RegistirationModule.API.Controllers
             try
             {
                 int count = await _context.Registirations.CountAsync();
+                _logger.LogInformation($"Get registrations count: {count}");
                 return Ok(count);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Failed to get registrations count. message: {ex.ToString()}");
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = ex.ToString() });
             }
         }
@@ -79,6 +81,7 @@ namespace RegistirationModule.API.Controllers
         {
             RegistirationService service = new RegistirationService(_context);
             var registiration = service.GetRegistirationById(id);
+            _logger.LogInformation($"Get Registration by Id: {registiration.Id}");
             return registiration != null ? Ok(registiration) : NotFound(new { message = "Registiration not found" });
         }
         [HttpPost]
@@ -86,7 +89,10 @@ namespace RegistirationModule.API.Controllers
         public async Task<IActionResult> Search(InputSearchDTO inputSearchDTO)
         {
             if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid data was provided to search endpoint");
                 return BadRequest(ModelState);
+            }
             try
             {
                 RegistirationService service = new RegistirationService(_context);
